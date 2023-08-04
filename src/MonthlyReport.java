@@ -2,8 +2,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MonthlyReport {
+    HashMap<String, ArrayList<String>> monthlyReport;
+
     Transaction transaction;
     MonthlyReport(HashMap<String, ArrayList<String>> monthlyReport){
+        this.monthlyReport = monthlyReport;
+    }
+
+
+    void printMonthlyReport() { // По сохранённым данным вывести в консоль имеющуюся информацию
+
+                //1 - название месяца;
+        mostProfitableProduct();       //2 - самый прибыльный товар, название товара и сумму;
+        biggestExpense();        //3 - самую большую трату, название товара и сумму.
+
+
+
+    }
+
+    void mostProfitableProduct(){
+
+        // самый прибыльный товар, название товара и сумму;
+
+    }
+
+    void biggestExpense(){
+
+        // самую большую трату, название товара и сумму.
 
     }
 
@@ -18,29 +43,5 @@ public class MonthlyReport {
         }
         return sumIncome;
     }
-
-    void printMonthlyReport() {
-        /* По сохранённым данным вывести в консоль имеющуюся информацию
-                1 - название месяца;
-                2 - самый прибыльный товар, название товара и сумму;
-                3 - самую большую трату, название товара и сумму.
-                Перед выполнением подсчётов необходимо проверить, что месячные отчёты были считаны из файла.
-                В случае если этого сделано не было, нужно предложить сначала считать данные.
-                */
-    }
-
-    int getMinSumIncome(){
-
-
-        return ;
-    }
-
-    int getMaxSumIncome(){
-
-
-        return ;
-    }
-
-
 
 }

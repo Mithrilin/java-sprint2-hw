@@ -6,31 +6,37 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         FileReader fileReader = new FileReader();
+        boolean isMonthlyReport = false;
+        boolean isYearlyReport = false;
+
+
         HashMap<String, ArrayList<String>> report = new HashMap<>();
+
+
         MonthlyReport monthlyReport;
+        YearlyReport yearlyReport;
+
 
         while (true) {
             printMenu(); // Вывод доступных пунктов меню в консоль
             int userInput = scanner.nextInt();
-            // Вызов соответствующего метода в зависимости от userInput
-            if (userInput == 1) {
 
-                // должно происходить считывание трёх файлов
-
-
+            if (userInput == 1) { // Считывание месячных отчётов.
                 for (int i = 1; i < 4; i++) {
                     ArrayList<String> lines = fileReader.readFileContents("m.20210" + i + ".csv");
                     report.put("m.20210" + i + ".csv", lines);
-
                 }
                 monthlyReport = new MonthlyReport(report);
-            } else if (userInput == 2) {
+                isMonthlyReport = true;
+            } else if (userInput == 2) { // Считывание годового отчёта.
+                ArrayList<String> lines = fileReader.readFileContents("y.2021.csv");
+                yearlyReport = new YearlyReport(lines);
+                isYearlyReport = true;
+            } else if (userInput == 3) { // Сверка отчётов.
+                if (isMonthlyReport&&isYearlyReport){
 
-                // должно происходить считывание из одного файла
 
 
-
-            } else if (userInput == 3) {
 
 
                 /* По сохранённым данным проверить, сходятся ли отчёты за месяцы и за год
@@ -41,28 +47,21 @@ public class Main {
                 4 - При обнаружении несоответствия программа должна вывести месяц, где оно обнаружено.
                 5 - Если несоответствий не обнаружено, приложение должно вывести только информацию об успешном завершении операции.
                 */
-
-            } else if (userInput == 4) {
-
-                /* По сохранённым данным вывести в консоль имеющуюся информацию
-                1 - название месяца;
-                2 - самый прибыльный товар, название товара и сумму;
-                3 - самую большую трату, название товара и сумму.
-                Перед выполнением подсчётов необходимо проверить, что месячные отчёты были считаны из файла.
-                В случае если этого сделано не было, нужно предложить сначала считать данные.
-                */
-
-            } else if (userInput == 5) {
-
-                /* По сохранённым данным вывести в консоль имеющуюся информацию
-                1 - рассматриваемый год
-                2 - прибыль по каждому месяцу
-                3 - средний расход за все имеющиеся операции в году;
-                4 - средний доход за все имеющиеся операции в году.
-                Перед выполнением подсчётов необходимо проверить, что месячные отчёты были считаны из файла.
-                В случае если этого сделано не было, нужно предложить сначала считать данные.
-                */
-
+                } else {
+                    System.out.println("Извините, отчёты отсутствуют. Сначала их необходимо загрузить.");
+                }
+            } else if (userInput == 4) { // Вывод информацию обо всех месячных отчётах.
+                if (isMonthlyReport){
+                    monthlyReport.printMonthlyReport();
+                } else {
+                    System.out.println("Извините, отчёты отсутствуют. Сначала их необходимо загрузить.");
+                }
+            } else if (userInput == 5) { // Вывод информацию о годовом отчёте.
+                if (isYearlyReport){
+                    yearlyReport.printYearlyReport();
+                } else {
+                    System.out.println("Извините, отчёт отсутствует. Сначала его необходимо загрузить.");
+                }
             } else if (userInput == 0) {
                 System.out.println("Выход");
                 break;
