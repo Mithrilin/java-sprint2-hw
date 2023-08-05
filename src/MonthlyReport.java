@@ -9,18 +9,15 @@ public class MonthlyReport {
         this.monthlyReport = monthlyReport;
 
     }
-
-
     void getMonthlyReport() { // По сохранённым данным вывод в консоль имеющейся информации
         System.out.println("Информация обо всех месячных отчётах.");
         for (int i = 1; i < 4; i++) {
-            System.out.println(months[i]);
+            System.out.println(months[i-1]);
             mostProfitableProduct(monthlyReport.get(i));
             biggestExpense(monthlyReport.get(i));
             System.out.println();
         }
     }
-
     void mostProfitableProduct(ArrayList<String> lines){ // Самый прибыльный товар, название товара и сумму;
         String nameOfProfitableProduct = null;
         int sumProfit = 0;
@@ -37,7 +34,6 @@ public class MonthlyReport {
         }
         System.out.println("Самый прибыльный товар: " + nameOfProfitableProduct + " " + sumProfit);
     }
-
     void biggestExpense(ArrayList<String> lines){ // Самая большая трата, название товара и сумму.
         String nameOfBiggestExpense = null;
         int sumExpense = 0;
@@ -52,10 +48,7 @@ public class MonthlyReport {
                 }
             }
         }
-        System.out.println("Самый прибыльный товар: " + nameOfBiggestExpense + " " + sumExpense);
-
-
-
+        System.out.println("Самая большая трата: " + nameOfBiggestExpense + " " + sumExpense);
     }
 
     int getSumIncome(ArrayList<String> lines){

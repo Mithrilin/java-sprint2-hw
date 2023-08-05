@@ -12,7 +12,7 @@ public class YearlyReport {
         profitForEachMonth();                //2 - прибыль по каждому месяцу
         averageExpensesForEachMonth();        //3 - средний расход за все имеющиеся операции в году;
         averageIncomeForEachMonth();        //4 - средний доход за все имеющиеся операции в году.
-
+        System.out.println();
     }
 
     void profitForEachMonth(){ // прибыль по каждому месяцу
@@ -59,7 +59,7 @@ public class YearlyReport {
             }
         }
         averageExpenses = sumExpenses/numberOfExpenses;
-        System.out.println("Средний расход за все имеющиеся операции в году: " + averageExpenses);
+        System.out.println("Средний расход за все имеющиеся операции в году: " + averageExpenses + " рублей.");
     }
 
     void averageIncomeForEachMonth(){ // средний доход за все имеющиеся операции в году.
@@ -74,7 +74,7 @@ public class YearlyReport {
             }
         }
         averageIncome = sumIncome/numberOfIncome;
-        System.out.println("Средний доход за все имеющиеся операции в году: " + averageIncome);
+        System.out.println("Средний доход за все имеющиеся операции в году: " + averageIncome + " рублей.");
     }
 
 }

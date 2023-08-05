@@ -28,10 +28,14 @@ public class Main {
                 }
                 monthlyReport = new MonthlyReport(report);
                 isMonthlyReport = true;
+                System.out.println("Все месячные отчёты загружены.");
+                System.out.println();
             } else if (userInput == 2) { // Считывание годового отчёта.
                 ArrayList<String> lines = fileReader.readFileContents("y.2021.csv");
                 yearlyReport = new YearlyReport(lines);
                 isYearlyReport = true;
+                System.out.println("Годовой отчёт загружен.");
+                System.out.println();
             } else if (userInput == 3) { // Сверка отчётов.
                 if (isMonthlyReport&&isYearlyReport){ // По сохранённым данным проверить, сходятся ли отчёты за месяцы и за год
 
