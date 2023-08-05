@@ -13,8 +13,8 @@ public class Main {
         HashMap<String, ArrayList<String>> report = new HashMap<>();
 
 
-        MonthlyReport monthlyReport;
-        YearlyReport yearlyReport;
+        MonthlyReport monthlyReport = null;
+        YearlyReport yearlyReport = null;
 
 
         while (true) {
@@ -58,7 +58,7 @@ public class Main {
                 }
             } else if (userInput == 5) { // Вывод информацию о годовом отчёте.
                 if (isYearlyReport){
-                    yearlyReport.printYearlyReport();
+                    yearlyReport.getYearlyReport();
                 } else {
                     System.out.println("Извините, отчёт отсутствует. Сначала его необходимо загрузить.");
                 }
