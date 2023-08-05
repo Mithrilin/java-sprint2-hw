@@ -8,19 +8,13 @@ public class Main {
         FileReader fileReader = new FileReader();
         boolean isMonthlyReport = false;
         boolean isYearlyReport = false;
-
-
         HashMap<Integer, ArrayList<String>> report = new HashMap<>();
-
-
         MonthlyReport monthlyReport = null;
         YearlyReport yearlyReport = null;
-
 
         while (true) {
             printMenu(); // Вывод доступных пунктов меню в консоль
             int userInput = scanner.nextInt();
-
             if (userInput == 1) { // Считывание месячных отчётов.
                 for (int i = 1; i < 4; i++) {
                     ArrayList<String> lines = fileReader.readFileContents("m.20210" + i + ".csv");
@@ -38,13 +32,7 @@ public class Main {
                 System.out.println();
             } else if (userInput == 3) { // Сверка отчётов.
                 if (isMonthlyReport&&isYearlyReport){ // По сохранённым данным проверить, сходятся ли отчёты за месяцы и за год
-
-                //Вам нужно проверить, что информация в годовом отчёте не противоречит информации в месячных отчётах
-                //2 - Подсчитать суммы доходов и расходов по каждому из месяцев.
-                //3 - Сверить полученные суммы с суммой доходов и расходов в отчёте по году.
-                //4 - При обнаружении несоответствия программа должна вывести месяц, где оно обнаружено.
-                //5 - Если несоответствий не обнаружено, приложение должно вывести только информацию об успешном завершении операции.
-                //
+                    comparisonOfReports(monthlyReport, yearlyReport, report);
                 } else {
                     System.out.println("Извините, отчёты отсутствуют. Сначала их необходимо загрузить.");
                 }
@@ -61,8 +49,9 @@ public class Main {
                     System.out.println("Извините, отчёт отсутствует. Сначала его необходимо загрузить.");
                 }
             } else if (userInput == 0) {
-                System.out.println("Выход");
-                break;
+                System.out.println("Завершение программы.");
+                scanner.close();
+                return;
             } else {
                 System.out.println("Извините, такой команды пока нет.");
             }
@@ -79,5 +68,23 @@ public class Main {
         System.out.println("5 - Вывести информацию о годовом отчёте.");
         System.out.println("0 - Выйти из программы.");
     }
+
+    static void comparisonOfReports (MonthlyReport monthlyReport, YearlyReport yearlyReport, HashMap<Integer, ArrayList<String>> report){ //Проверка отчётов
+
+        //2 - Подсчитать суммы доходов и расходов по каждому из месяцев.
+        //3 - Сверить полученные суммы с суммой доходов и расходов в отчёте по году.
+        //4 - При обнаружении несоответствия программа должна вывести месяц, где оно обнаружено.
+        for (int i = 1; i < 3; i++){
+            ArrayList<String> line = report.get(i);
+            int sumExpense = monthlyReport.getSumExpense(line);
+            int sumIncome = monthlyReport.getSumIncome(line);
+            if (sumExpense == yearlyReport.)
+
+
+        }
+
+        System.out.println("Сверка завершена. Отчёты идентичны."); //5 - Если несоответствий не обнаружено, приложение должно вывести только информацию об успешном завершении операции.
+    }
+
 }
 

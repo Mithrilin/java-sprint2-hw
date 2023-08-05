@@ -2,24 +2,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 public class YearlyReport {
     ArrayList<String> yearlyReport;
-
+    HashMap<String, Integer> january = new HashMap<>();
+    HashMap<String, Integer> february = new HashMap<>();
+    HashMap<String, Integer> march = new HashMap<>();
     YearlyReport(ArrayList<String> yearlyReport){
         this.yearlyReport = yearlyReport;
-    }
-
-    void getYearlyReport() { // По сохранённым данным вывести в консоль имеющуюся информацию
-        System.out.println("2021й год.");    //1 - рассматриваемый год
-        profitForEachMonth();                //2 - прибыль по каждому месяцу
-        averageExpensesForEachMonth();        //3 - средний расход за все имеющиеся операции в году;
-        averageIncomeForEachMonth();        //4 - средний доход за все имеющиеся операции в году.
-        System.out.println();
-    }
-
-    void profitForEachMonth(){ // прибыль по каждому месяцу
-        HashMap<String, Integer> january = new HashMap<>();
-        HashMap<String, Integer> february = new HashMap<>();
-        HashMap<String, Integer> march = new HashMap<>();
-        System.out.println("Прибыль по каждому месяцу:");
         for (int i = 1; i < yearlyReport.size(); i++) {
             String[] lineContents = yearlyReport.get(i).split(",");
             if (lineContents[0].equals("01")){
@@ -42,6 +29,20 @@ public class YearlyReport {
                 }
             }
         }
+    }
+
+    void getYearlyReport() { // По сохранённым данным вывести в консоль имеющуюся информацию
+        System.out.println("2021й год.");    //1 - рассматриваемый год
+        profitForEachMonth();                //2 - прибыль по каждому месяцу
+        averageExpensesForEachMonth();        //3 - средний расход за все имеющиеся операции в году;
+        averageIncomeForEachMonth();        //4 - средний доход за все имеющиеся операции в году.
+        System.out.println();
+    }
+
+    void profitForEachMonth(){ // прибыль по каждому месяцу
+
+        System.out.println("Прибыль по каждому месяцу:");
+
         System.out.println("Январь: " + (january.get("Доход") - january.get("Расход")) + " рублей.");
         System.out.println("Февраль: " + (february.get("Доход") - february.get("Расход")) + " рублей.");
         System.out.println("Март: " + (march.get("Доход") - march.get("Расход")) + " рублей.");
