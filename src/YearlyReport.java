@@ -35,11 +35,11 @@ public class YearlyReport {
         months.add(2, march);
     }
 
-    void getYearlyReport() { // По сохранённым данным вывести в консоль имеющуюся информацию
+    void getYearlyReport() {                 // Вывести в консоль имеющуюся информацию
         System.out.println("2021й год.");    //1 - рассматриваемый год
         profitForEachMonth();                //2 - прибыль по каждому месяцу
-        averageExpensesForEachMonth();        //3 - средний расход за все имеющиеся операции в году;
-        averageIncomeForEachMonth();        //4 - средний доход за все имеющиеся операции в году.
+        averageExpensesForEachMonth();       //3 - средний расход за все имеющиеся операции в году;
+        averageIncomeForEachMonth();         //4 - средний доход за все имеющиеся операции в году.
         System.out.println();
     }
 
@@ -52,7 +52,7 @@ public class YearlyReport {
         System.out.println("Март: " + (march.get("Доход") - march.get("Расход")) + " рублей.");
     }
 
-    void averageExpensesForEachMonth(){ // средний расход за все имеющиеся операции в году;
+    void averageExpensesForEachMonth(){ // средний расход за все имеющиеся операции в году
         int averageExpenses;
         int sumExpenses = 0;
         int numberOfExpenses = 0;

@@ -31,7 +31,7 @@ public class Main {
                 System.out.println("Годовой отчёт загружен.");
                 System.out.println();
             } else if (userInput == 3) { // Сверка отчётов.
-                if (isMonthlyReport&&isYearlyReport){ // По сохранённым данным проверить, сходятся ли отчёты за месяцы и за год
+                if (isMonthlyReport&&isYearlyReport){ // По сохранённым данным проверка, сходятся ли отчёты за месяцы и за год
                     comparisonOfReports(monthlyReport, yearlyReport, report);
                 } else {
                     System.out.println("Извините, отчёты отсутствуют. Сначала их необходимо загрузить.");
@@ -69,21 +69,23 @@ public class Main {
         System.out.println("0 - Выйти из программы.");
     }
 
-    static void comparisonOfReports (MonthlyReport monthlyReport, YearlyReport yearlyReport, HashMap<Integer, ArrayList<String>> report){ //Проверка отчётов
+    static void comparisonOfReports (MonthlyReport monthlyReport, YearlyReport yearlyReport,
+                                     HashMap<Integer, ArrayList<String>> report){ //Проверка отчётов
         boolean isReportsAreEqual = true;
         for (int i = 1; i < 4; i++){
             ArrayList<String> line = report.get(i);
             int sumExpenseFromMonthlyReport = monthlyReport.getSumExpense(line);
             int sumIncomeFromMonthlyReport = monthlyReport.getSumIncome(line);
             int sumExpenseFromYearlyReport = yearlyReport.months.get(i-1).get("Расход");
-            int sumIncomeFromYearlyReport = yearlyReport.months.get(i-1).get("Доход");;
-            if ((sumExpenseFromMonthlyReport != sumExpenseFromYearlyReport) || (sumIncomeFromMonthlyReport != sumIncomeFromYearlyReport)){
+            int sumIncomeFromYearlyReport = yearlyReport.months.get(i-1).get("Доход");
+            if ((sumExpenseFromMonthlyReport != sumExpenseFromYearlyReport) ||
+                    (sumIncomeFromMonthlyReport != sumIncomeFromYearlyReport)){
                 System.out.println("Обнаружены различия в отчётах за " + monthlyReport.months[i-1] + ".");
                 isReportsAreEqual = false;
             }
         }
         if (isReportsAreEqual) {
-            System.out.println("Сверка завершена. Отчёты идентичны."); //5 - Если несоответствий не обнаружено, приложение должно вывести только информацию об успешном завершении операции.
+            System.out.println("Сверка завершена. Отчёты идентичны.");
         }
     }
 
