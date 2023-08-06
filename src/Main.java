@@ -70,20 +70,21 @@ public class Main {
     }
 
     static void comparisonOfReports (MonthlyReport monthlyReport, YearlyReport yearlyReport, HashMap<Integer, ArrayList<String>> report){ //Проверка отчётов
-
-        //2 - Подсчитать суммы доходов и расходов по каждому из месяцев.
-        //3 - Сверить полученные суммы с суммой доходов и расходов в отчёте по году.
-        //4 - При обнаружении несоответствия программа должна вывести месяц, где оно обнаружено.
-        for (int i = 1; i < 3; i++){
+        boolean isReportsAreEqual = true;
+        for (int i = 1; i < 4; i++){
             ArrayList<String> line = report.get(i);
-            int sumExpense = monthlyReport.getSumExpense(line);
-            int sumIncome = monthlyReport.getSumIncome(line);
-            if (sumExpense == yearlyReport.)
-
-
+            int sumExpenseFromMonthlyReport = monthlyReport.getSumExpense(line);
+            int sumIncomeFromMonthlyReport = monthlyReport.getSumIncome(line);
+            int sumExpenseFromYearlyReport = yearlyReport.months.get(i-1).get("Расход");
+            int sumIncomeFromYearlyReport = yearlyReport.months.get(i-1).get("Доход");;
+            if ((sumExpenseFromMonthlyReport != sumExpenseFromYearlyReport) || (sumIncomeFromMonthlyReport != sumIncomeFromYearlyReport)){
+                System.out.println("Обнаружены различия в отчётах за " + monthlyReport.months[i-1] + ".");
+                isReportsAreEqual = false;
+            }
         }
-
-        System.out.println("Сверка завершена. Отчёты идентичны."); //5 - Если несоответствий не обнаружено, приложение должно вывести только информацию об успешном завершении операции.
+        if (isReportsAreEqual) {
+            System.out.println("Сверка завершена. Отчёты идентичны."); //5 - Если несоответствий не обнаружено, приложение должно вывести только информацию об успешном завершении операции.
+        }
     }
 
 }
