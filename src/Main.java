@@ -73,9 +73,9 @@ public class Main {
                                      HashMap<Integer, ArrayList<String>> report){ //Проверка отчётов
         boolean isReportsAreEqual = true;
         for (int i = 1; i < 4; i++){
-            ArrayList<String> line = report.get(i);
-            int sumExpenseFromMonthlyReport = monthlyReport.getSumExpense(line);
-            int sumIncomeFromMonthlyReport = monthlyReport.getSumIncome(line);
+            ArrayList<String> lines = report.get(i);
+            int sumExpenseFromMonthlyReport = monthlyReport.getSumExpense(lines);
+            int sumIncomeFromMonthlyReport = monthlyReport.getSumIncome(lines);
             int sumExpenseFromYearlyReport = yearlyReport.months.get(i-1).get("Расход");
             int sumIncomeFromYearlyReport = yearlyReport.months.get(i-1).get("Доход");
             if ((sumExpenseFromMonthlyReport != sumExpenseFromYearlyReport) ||
