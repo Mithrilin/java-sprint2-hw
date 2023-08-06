@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 public class YearlyReport {
     ArrayList<String> yearlyReport;
+    ArrayList<HashMap<String, Integer>> months = new ArrayList<>();
     HashMap<String, Integer> january = new HashMap<>();
     HashMap<String, Integer> february = new HashMap<>();
     HashMap<String, Integer> march = new HashMap<>();
@@ -29,6 +30,9 @@ public class YearlyReport {
                 }
             }
         }
+        months.add(0, january);
+        months.add(1, february);
+        months.add(2, march);
     }
 
     void getYearlyReport() { // По сохранённым данным вывести в консоль имеющуюся информацию
