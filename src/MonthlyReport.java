@@ -2,19 +2,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MonthlyReport {
-    HashMap<Integer, ArrayList<String>> monthlyReport;
+    HashMap<Integer, ArrayList<String>> reportForAllMonths;
     String[] months = {"Январь", "Февраль", "Март"};
     Transaction transaction;
-    MonthlyReport(HashMap<Integer, ArrayList<String>> monthlyReport){
-        this.monthlyReport = monthlyReport;
+    MonthlyReport(HashMap<Integer, ArrayList<String>> reportForAllMonths){
+        this.reportForAllMonths = reportForAllMonths;
 
     }
     void getMonthlyReport() { // Вывод в консоль имеющейся информации
         System.out.println("Информация обо всех месячных отчётах.");
         for (int i = 1; i < 4; i++) {
             System.out.println(months[i-1]);
-            mostProfitableProduct(monthlyReport.get(i));
-            biggestExpense(monthlyReport.get(i));
+            mostProfitableProduct(reportForAllMonths.get(i));
+            biggestExpense(reportForAllMonths.get(i));
             System.out.println();
         }
     }

@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 public class YearlyReport {
-    ArrayList<String> yearlyReport;
+    ArrayList<String> reportForYear;
     ArrayList<HashMap<String, Integer>> months = new ArrayList<>();
     HashMap<String, Integer> january = new HashMap<>();
     HashMap<String, Integer> february = new HashMap<>();
     HashMap<String, Integer> march = new HashMap<>();
     YearlyReport(ArrayList<String> yearlyReport){
-        this.yearlyReport = yearlyReport;
+        this.reportForYear = yearlyReport;
         for (int i = 1; i < yearlyReport.size(); i++) {
             String[] lineContents = yearlyReport.get(i).split(",");
             if (lineContents[0].equals("01")){
@@ -56,8 +56,8 @@ public class YearlyReport {
         int averageExpenses;
         int sumExpenses = 0;
         int numberOfExpenses = 0;
-        for (int i = 1; i < yearlyReport.size(); i++) {
-            String[] lineContents = yearlyReport.get(i).split(",");
+        for (int i = 1; i < reportForYear.size(); i++) {
+            String[] lineContents = reportForYear.get(i).split(",");
             if (lineContents[2].equals("true")) {
                 sumExpenses += Integer.parseInt(lineContents[1]);
                 numberOfExpenses++;
@@ -71,8 +71,8 @@ public class YearlyReport {
         int averageIncome;
         int sumIncome = 0;
         int numberOfIncome = 0;
-        for (int i = 1; i < yearlyReport.size(); i++) {
-            String[] lineContents = yearlyReport.get(i).split(",");
+        for (int i = 1; i < reportForYear.size(); i++) {
+            String[] lineContents = reportForYear.get(i).split(",");
             if (lineContents[2].equals("false")) {
                 sumIncome += Integer.parseInt(lineContents[1]);
                 numberOfIncome++;
