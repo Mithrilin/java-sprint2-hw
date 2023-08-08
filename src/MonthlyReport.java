@@ -3,6 +3,7 @@ import java.util.HashMap;
 
 public class MonthlyReport {
     HashMap<Integer, ArrayList<String>> reportForAllMonths;
+    boolean isLines = false;
     FileReader fileReader = new FileReader();
     String[] months = {"Январь", "Февраль", "Март", "Апрель", "Май",
                        "Июнь", "Июль", "Август", "Сентябрь",
@@ -10,9 +11,17 @@ public class MonthlyReport {
     Transaction transaction;
     MonthlyReport(){
         reportForAllMonths = new HashMap<>();
-        for (int i = 1; i < 4; i++) {
-            ArrayList<String> lines = fileReader.readFileContents("m.20210" + i + ".csv");
-            reportForAllMonths.put(i, lines);
+        for (int i = 1; i < 12; i++) {
+            ArrayList<String> lines;
+            if (i < 10) {
+                lines = fileReader.readFileContents("m.20210" + i + ".csv");
+            } else {
+                lines = fileReader.readFileContents("m.2021" + i + ".csv");
+            }
+            if (lines.size() != 0) {
+                reportForAllMonths.put(i, lines);
+                isLines = true;
+            }
         }
     }
 

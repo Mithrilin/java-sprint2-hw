@@ -3,39 +3,45 @@ import java.util.HashMap;
 public class YearlyReport {
     ArrayList<String> reportForYear;
     FileReader fileReader = new FileReader();
-    MonthlyReport monthlyReport = new MonthlyReport();
+    MonthlyReport monthlyReport;
     ArrayList<HashMap<String, Integer>> months = new ArrayList<>();
     HashMap<String, Integer> january = new HashMap<>();
     HashMap<String, Integer> february = new HashMap<>();
     HashMap<String, Integer> march = new HashMap<>();
     YearlyReport(){
         ArrayList<String> yearlyReport = fileReader.readFileContents("y.2021.csv");
-        this.reportForYear = yearlyReport;
-        for (int i = 1; i < yearlyReport.size(); i++) {
-            String[] lineContents = yearlyReport.get(i).split(",");
-            if (lineContents[0].equals("01")){
-                if (lineContents[2].equals("true")) {
-                    january.put("Расход", Integer.parseInt(lineContents[1]));
+        if (yearlyReport.size() != 0) {
+            this.reportForYear = yearlyReport;
+
+            for (int i = 1; i < yearlyReport.size(); i++) {
+                String[] lineContents = yearlyReport.get(i).split(",");
+                if (lineContents[0].equals("01")) {
+                    if (lineContents[2].equals("true")) {
+                        january.put("Расход", Integer.parseInt(lineContents[1]));
+                    } else {
+                        january.put("Доход", Integer.parseInt(lineContents[1]));
+                    }
+                } else if (lineContents[0].equals("02")) {
+                    if (lineContents[2].equals("true")) {
+                        february.put("Расход", Integer.parseInt(lineContents[1]));
+                    } else {
+                        february.put("Доход", Integer.parseInt(lineContents[1]));
+                    }
                 } else {
-                    january.put("Доход", Integer.parseInt(lineContents[1]));
-                }
-            } else if (lineContents[0].equals("02")){
-                if (lineContents[2].equals("true")) {
-                    february.put("Расход", Integer.parseInt(lineContents[1]));
-                } else {
-                    february.put("Доход", Integer.parseInt(lineContents[1]));
-                }
-            } else {
-                if (lineContents[2].equals("true")) {
-                    march.put("Расход", Integer.parseInt(lineContents[1]));
-                } else {
-                    march.put("Доход", Integer.parseInt(lineContents[1]));
+                    if (lineContents[2].equals("true")) {
+                        march.put("Расход", Integer.parseInt(lineContents[1]));
+                    } else {
+                        march.put("Доход", Integer.parseInt(lineContents[1]));
+                    }
                 }
             }
+            months.add(0, january);
+            months.add(1, february);
+            months.add(2, march);
+            System.out.println("Годовой отчёт загружен.");
+        } else {
+            System.out.println("Невозможно прочитать файлы с отчётом. Возможно, они отсутствуют в нужной директории.");
         }
-        months.add(0, january);
-        months.add(1, february);
-        months.add(2, march);
     }
 
     void getYearlyReport() {                 // Вывести в консоль имеющуюся информацию
@@ -84,6 +90,7 @@ public class YearlyReport {
     }
 
     void comparisonOfReports(){        //Проверка отчётов
+        monthlyReport = new MonthlyReport();
         boolean isReportsAreEqual = true;
         for (int i = 1; i < 4; i++) {
             ArrayList<String> lines = monthlyReport.reportForAllMonths.get(i);

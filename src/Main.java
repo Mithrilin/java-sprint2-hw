@@ -10,11 +10,14 @@ public class Main {
             int userInput = scanner.nextInt();
             if (userInput == 1) { // Считывание месячных отчётов.
                 monthlyReport = new MonthlyReport();
-                System.out.println("Все месячные отчёты загружены.");
+                if (!monthlyReport.isLines) {
+                    System.out.println("Невозможно прочитать файлы с отчётом. Возможно, они отсутствуют в нужной директории.");
+                } else {
+                    System.out.println("Все месячные отчёты загружены.");
+                }
                 System.out.println();
             } else if (userInput == 2) { // Считывание годового отчёта.
                 yearlyReport = new YearlyReport();
-                System.out.println("Годовой отчёт загружен.");
                 System.out.println();
             } else if (userInput == 3) { // Сверка отчётов.
                  if ((monthlyReport != null) && (yearlyReport != null)) {// По сохранённым данным проверка, сходятся ли отчёты за месяцы и за год
