@@ -5,13 +5,13 @@ public class MonthlyReport {
     HashMap<Integer, ArrayList<String>> reportForAllMonths;
     boolean isLines = false;
     FileReader fileReader = new FileReader();
-    String[] months = {"Январь", "Февраль", "Март", "Апрель", "Май",
+    String[] monthsName = {"Январь", "Февраль", "Март", "Апрель", "Май",
                        "Июнь", "Июль", "Август", "Сентябрь",
                        "Октябрь", "Ноябрь", "Декабрь"};
     Transaction transaction;
     MonthlyReport(){
         reportForAllMonths = new HashMap<>();
-        for (int i = 1; i < 12; i++) {
+        for (int i = 1; i <= 12; i++) {
             ArrayList<String> lines;
             if (i < 10) {
                 lines = fileReader.readFileContents("m.20210" + i + ".csv");
@@ -27,11 +27,13 @@ public class MonthlyReport {
 
     void getMonthlyReport() { // Вывод в консоль имеющейся информации
         System.out.println("Информация обо всех месячных отчётах.");
-        for (int i = 1; i < 4; i++) {
-            System.out.println(months[i - 1]);
-            mostProfitableProduct(reportForAllMonths.get(i));
-            biggestExpense(reportForAllMonths.get(i));
-            System.out.println();
+        for (int i = 1; i <= 12; i++) {
+            if (reportForAllMonths.get(i) != null) {
+                System.out.println(monthsName[i - 1]);
+                mostProfitableProduct(reportForAllMonths.get(i));
+                biggestExpense(reportForAllMonths.get(i));
+                System.out.println();
+            }
         }
     }
 

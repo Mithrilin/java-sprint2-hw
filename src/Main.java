@@ -11,7 +11,8 @@ public class Main {
             if (userInput == 1) { // Считывание месячных отчётов.
                 monthlyReport = new MonthlyReport();
                 if (!monthlyReport.isLines) {
-                    System.out.println("Невозможно прочитать файлы с отчётом. Возможно, они отсутствуют в нужной директории.");
+                    System.out.println("Невозможно прочитать файлы с отчётом. " +
+                            "Возможно, они отсутствуют в нужной директории.");
                 } else {
                     System.out.println("Все месячные отчёты загружены.");
                 }
@@ -20,7 +21,8 @@ public class Main {
                 yearlyReport = new YearlyReport();
                 System.out.println();
             } else if (userInput == 3) { // Сверка отчётов.
-                 if ((monthlyReport != null) && (yearlyReport != null)) {// По сохранённым данным проверка, сходятся ли отчёты за месяцы и за год
+                // По сохранённым данным проверка, сходятся ли отчёты за месяцы и за год
+                 if ((monthlyReport != null) && (yearlyReport != null)) {
                      yearlyReport.comparisonOfReports();
                  } else {
                      System.out.println("Извините, отчёты отсутствуют. Сначала их необходимо загрузить.");

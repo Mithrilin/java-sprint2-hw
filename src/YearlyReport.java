@@ -5,39 +5,27 @@ public class YearlyReport {
     FileReader fileReader = new FileReader();
     MonthlyReport monthlyReport;
     ArrayList<HashMap<String, Integer>> months = new ArrayList<>();
-    HashMap<String, Integer> january = new HashMap<>();
-    HashMap<String, Integer> february = new HashMap<>();
-    HashMap<String, Integer> march = new HashMap<>();
+    String[] monthsName = {"Январь", "Февраль", "Март", "Апрель", "Май",
+            "Июнь", "Июль", "Август", "Сентябрь",
+            "Октябрь", "Ноябрь", "Декабрь"};
+
     YearlyReport(){
         ArrayList<String> yearlyReport = fileReader.readFileContents("y.2021.csv");
         if (yearlyReport.size() != 0) {
             this.reportForYear = yearlyReport;
-
+            for (int i = 0; i < 12; i++){
+                months.add(i, new HashMap<>());
+            }
             for (int i = 1; i < yearlyReport.size(); i++) {
                 String[] lineContents = yearlyReport.get(i).split(",");
-                if (lineContents[0].equals("01")) {
+                for (int k = 1; k <= 12; k++){
                     if (lineContents[2].equals("true")) {
-                        january.put("Расход", Integer.parseInt(lineContents[1]));
+                        months.get(Integer.parseInt(lineContents[0])-1).put("Расход", Integer.parseInt(lineContents[1]));
                     } else {
-                        january.put("Доход", Integer.parseInt(lineContents[1]));
-                    }
-                } else if (lineContents[0].equals("02")) {
-                    if (lineContents[2].equals("true")) {
-                        february.put("Расход", Integer.parseInt(lineContents[1]));
-                    } else {
-                        february.put("Доход", Integer.parseInt(lineContents[1]));
-                    }
-                } else {
-                    if (lineContents[2].equals("true")) {
-                        march.put("Расход", Integer.parseInt(lineContents[1]));
-                    } else {
-                        march.put("Доход", Integer.parseInt(lineContents[1]));
+                        months.get(Integer.parseInt(lineContents[0])-1).put("Доход", Integer.parseInt(lineContents[1]));
                     }
                 }
             }
-            months.add(0, january);
-            months.add(1, february);
-            months.add(2, march);
             System.out.println("Годовой отчёт загружен.");
         } else {
             System.out.println("Невозможно прочитать файлы с отчётом. Возможно, они отсутствуют в нужной директории.");
@@ -54,9 +42,12 @@ public class YearlyReport {
 
     void profitForEachMonth(){ // прибыль по каждому месяцу
         System.out.println("Прибыль по каждому месяцу:");
-        System.out.println("Январь: " + (january.get("Доход") - january.get("Расход")) + " рублей.");
-        System.out.println("Февраль: " + (february.get("Доход") - february.get("Расход")) + " рублей.");
-        System.out.println("Март: " + (march.get("Доход") - march.get("Расход")) + " рублей.");
+        for (int i = 0; i < 12; i++) {
+            if (!months.get(i).isEmpty()) {
+                System.out.println(monthsName[i] + ": " + (months.get(i).get("Доход")
+                        - months.get(i).get("Расход")) + " рублей.");
+            }
+        }
     }
 
     void averageExpensesForEachMonth(){ // средний расход за все имеющиеся операции в году
@@ -92,16 +83,18 @@ public class YearlyReport {
     void comparisonOfReports(){        //Проверка отчётов
         monthlyReport = new MonthlyReport();
         boolean isReportsAreEqual = true;
-        for (int i = 1; i < 4; i++) {
-            ArrayList<String> lines = monthlyReport.reportForAllMonths.get(i);
-            int sumExpenseFromMonthlyReport = monthlyReport.getSumExpense(lines);
-            int sumIncomeFromMonthlyReport = monthlyReport.getSumIncome(lines);
-            int sumExpenseFromYearlyReport = months.get(i - 1).get("Расход");
-            int sumIncomeFromYearlyReport = months.get(i - 1).get("Доход");
-            if ((sumExpenseFromMonthlyReport != sumExpenseFromYearlyReport) ||
-                    (sumIncomeFromMonthlyReport != sumIncomeFromYearlyReport)) {
-                System.out.println("Обнаружены различия в отчётах за " + monthlyReport.months[i - 1] + ".");
-                isReportsAreEqual = false;
+        for (int i = 0; i < 12; i++) {
+            if (!months.get(i).isEmpty()) {
+                ArrayList<String> lines = monthlyReport.reportForAllMonths.get(i+1);
+                int sumExpenseFromMonthlyReport = monthlyReport.getSumExpense(lines);
+                int sumIncomeFromMonthlyReport = monthlyReport.getSumIncome(lines);
+                int sumExpenseFromYearlyReport = months.get(i).get("Расход");
+                int sumIncomeFromYearlyReport = months.get(i).get("Доход");
+                if ((sumExpenseFromMonthlyReport != sumExpenseFromYearlyReport) ||
+                        (sumIncomeFromMonthlyReport != sumIncomeFromYearlyReport)) {
+                    System.out.println("Обнаружены различия в отчётах за " + monthsName[i] + ".");
+                    isReportsAreEqual = false;
+                }
             }
         }
         if (isReportsAreEqual) {
