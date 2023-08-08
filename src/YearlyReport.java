@@ -2,11 +2,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 public class YearlyReport {
     ArrayList<String> reportForYear;
+    FileReader fileReader = new FileReader();
+    MonthlyReport monthlyReport = new MonthlyReport();
     ArrayList<HashMap<String, Integer>> months = new ArrayList<>();
     HashMap<String, Integer> january = new HashMap<>();
     HashMap<String, Integer> february = new HashMap<>();
     HashMap<String, Integer> march = new HashMap<>();
-    YearlyReport(ArrayList<String> yearlyReport){
+    YearlyReport(){
+        ArrayList<String> yearlyReport = fileReader.readFileContents("y.2021.csv");
         this.reportForYear = yearlyReport;
         for (int i = 1; i < yearlyReport.size(); i++) {
             String[] lineContents = yearlyReport.get(i).split(",");
@@ -44,9 +47,7 @@ public class YearlyReport {
     }
 
     void profitForEachMonth(){ // прибыль по каждому месяцу
-
         System.out.println("Прибыль по каждому месяцу:");
-
         System.out.println("Январь: " + (january.get("Доход") - january.get("Расход")) + " рублей.");
         System.out.println("Февраль: " + (february.get("Доход") - february.get("Расход")) + " рублей.");
         System.out.println("Март: " + (march.get("Доход") - march.get("Расход")) + " рублей.");
@@ -82,4 +83,22 @@ public class YearlyReport {
         System.out.println("Средний доход за все имеющиеся операции в году: " + averageIncome + " рублей.");
     }
 
+    void comparisonOfReports(){        //Проверка отчётов
+        boolean isReportsAreEqual = true;
+        for (int i = 1; i < 4; i++) {
+            ArrayList<String> lines = monthlyReport.reportForAllMonths.get(i);
+            int sumExpenseFromMonthlyReport = monthlyReport.getSumExpense(lines);
+            int sumIncomeFromMonthlyReport = monthlyReport.getSumIncome(lines);
+            int sumExpenseFromYearlyReport = months.get(i - 1).get("Расход");
+            int sumIncomeFromYearlyReport = months.get(i - 1).get("Доход");
+            if ((sumExpenseFromMonthlyReport != sumExpenseFromYearlyReport) ||
+                    (sumIncomeFromMonthlyReport != sumIncomeFromYearlyReport)) {
+                System.out.println("Обнаружены различия в отчётах за " + monthlyReport.months[i - 1] + ".");
+                isReportsAreEqual = false;
+            }
+        }
+        if (isReportsAreEqual) {
+            System.out.println("Сверка завершена. Отчёты идентичны.");
+        }
+    }
 }
